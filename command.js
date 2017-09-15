@@ -1,15 +1,21 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 const chalk = require('chalk')
 const dashdash = require('dashdash')
-const has = require('lodash/fp/has')
+const fs = require('fs')
+const camelCase = require('lodash/fp/camelCase')
 const concat = require('lodash/fp/concat')
+const has = require('lodash/fp/has')
+const isEmpty = require('lodash/fp/isEmpty')
+const mapKeys = require('lodash/fp/mapKeys')
 const UserCommand = require('./lib/commands/UserCommand')
 const packageJson = require('./package.json')
 
 const COMMANDS = {
   user: {
-    run: ({ argv }) => { new UserCommand({ argv }).run() },
+    run: ({ argv, credentialsFile }) => { new UserCommand({ argv, credentialsFile }).run() },
     help: 'Show user information',
   },
 }
@@ -17,6 +23,11 @@ const COMMANDS = {
 const parser = dashdash.createParser({
   interspersed: false,
   options: [{
+    names: ['credentials-file', 'c'],
+    type: 'string',
+    help: '[Required] Must be a JSON file and contain a refresh_token.',
+    default: './credentials.json',
+  }, {
     names: ['help', 'h'],
     type: 'bool',
     help: 'Print this help and exit.',
@@ -29,7 +40,7 @@ const parser = dashdash.createParser({
 
 class Command {
   constructor({ argv }) {
-    this.options = parser.parse(argv)
+    this.options = mapKeys(camelCase, parser.parse(argv))
   }
 
   run() {
@@ -43,14 +54,22 @@ class Command {
       process.exit(0)
     }
 
-    const [command] = this.options._args
-    if (!has(command, COMMANDS)) {
+
+    const { args, credentialsFile } = this.options
+    this.validateCredentialsFile(credentialsFile)
+    const [command] = args
+    if (isEmpty(command)) {
       console.error(this.usage()) // eslint-disable-line no-console
-      console.error(chalk.red(`\nInvalid command: "${command}"`)) // eslint-disable-line no-console
+      console.error(chalk.red('\nMissing a <command>')) // eslint-disable-line no-console
       process.exit(1)
     }
-    COMMANDS[command].run({ argv: concat(['node'], this.options._args) })
-    // const tradingPost = new TradingPost
+
+    if (!has(command, COMMANDS)) {
+      console.error(this.usage()) // eslint-disable-line no-console
+      console.error(chalk.red(`\nInvalid <command>: "${command}"`)) // eslint-disable-line no-console
+      process.exit(1)
+    }
+    COMMANDS[command].run({ argv: concat(['node'], args), credentialsFile })
   }
 
   usage() {
@@ -63,6 +82,38 @@ ${parser.help({ includeEnv: true, indent: 4 })}
 COMMANDS:
     user    Show user information
     `.trim()
+  }
+
+  validateCredentialsFile(credentialsFile) {
+    if (isEmpty(credentialsFile)) {
+      console.error(this.usage())
+      console.error(chalk.red('Missing required option --credentials-file, -c'))
+      process.exit(1)
+    }
+
+    let credentialsStr
+    try {
+      credentialsStr = fs.readFileSync(credentialsFile, 'utf8')
+    } catch (error) {
+      console.error(this.usage())
+      console.error(chalk.red(`Could not access file at "${credentialsFile}": \n${error.stack}`))
+      process.exit(1)
+    }
+
+    let credentials
+    try {
+      credentials = JSON.parse(credentialsStr)
+    } catch (error) {
+      console.error(this.usage())
+      console.error(chalk.red(`Could not parse JSON in "${credentialsFile}": \n${error.stack}`))
+      process.exit(1)
+    }
+
+    if (isEmpty(credentials.refresh_token)) {
+      console.error(this.usage())
+      console.error(chalk.red(`File at "${credentialsFile}" is missing the key "refresh_token"`))
+      process.exit(1)
+    }
   }
 }
 
