@@ -1,11 +1,14 @@
 {
-  "name": "node-trading-post",
-  "version": "1.3.0",
+  "name": "trading-post",
+  "version": "1.3.1",
   "main": "index.js",
   "bin": "command.js",
   "repository": "git@github.com:royvandewater/node-trading-post.git",
   "author": "Roy van de Water <roy.v.water@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "test": "exit 0"
+  },
   "dependencies": {
     "chalk": "^2.1.0",
     "dashdash": "^1.14.1",
