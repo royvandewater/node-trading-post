@@ -15,7 +15,7 @@ const packageJson = require('./package.json')
 
 const COMMANDS = {
   user: {
-    run: ({ argv, credentialsFile }) => { new UserCommand({ argv, credentialsFile }).run() },
+    run: ({ argv, baseUrl, credentialsFile }) => { new UserCommand({ argv, baseUrl, credentialsFile }).run() },
     help: 'Show user information',
   },
 }
@@ -23,9 +23,14 @@ const COMMANDS = {
 const parser = dashdash.createParser({
   interspersed: false,
   options: [{
+    names: ['base-url', 'b'],
+    type: 'string',
+    help: 'URL where the trading-post API can be found',
+    default: 'https://trading-post.club',
+  }, {
     names: ['credentials-file', 'c'],
     type: 'string',
-    help: '[Required] Must be a JSON file and contain a refresh_token.',
+    help: '[Required] Must be a JSON file and contain a refresh_token. access_token will automatically be retrieved and cached here.',
     default: './credentials.json',
   }, {
     names: ['help', 'h'],
@@ -45,31 +50,34 @@ class Command {
 
   run() {
     if (this.options.help) {
-      console.log(this.usage()) // eslint-disable-line no-console
+      console.log(this.usage())
       process.exit(0)
     }
 
     if (this.options.version) {
-      console.log(packageJson.version) // eslint-disable-line no-console
+      console.log(packageJson.version)
       process.exit(0)
     }
 
-
-    const { args, credentialsFile } = this.options
+    const { args, baseUrl, credentialsFile } = this.options
     this.validateCredentialsFile(credentialsFile)
     const [command] = args
     if (isEmpty(command)) {
-      console.error(this.usage()) // eslint-disable-line no-console
-      console.error(chalk.red('\nMissing a <command>')) // eslint-disable-line no-console
+      console.error(this.usage())
+      console.error(chalk.red('\nMissing a <command>'))
       process.exit(1)
     }
 
     if (!has(command, COMMANDS)) {
-      console.error(this.usage()) // eslint-disable-line no-console
-      console.error(chalk.red(`\nInvalid <command>: "${command}"`)) // eslint-disable-line no-console
+      console.error(this.usage())
+      console.error(chalk.red(`\nInvalid <command>: "${command}"`))
       process.exit(1)
     }
-    COMMANDS[command].run({ argv: concat(['node'], args), credentialsFile })
+    COMMANDS[command].run({
+      argv: concat(['node'], args),
+      baseUrl,
+      credentialsFile,
+    })
   }
 
   usage() {
