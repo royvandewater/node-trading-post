@@ -39,7 +39,7 @@ tradingPost.getUser((error, user) => {
 
 ### Constructor
 | Parameter               | Type   | Required | Description                                  |
-| ------------------------| -------| -------- | ---------------------------------------------|
+| ------------------------| -------| -------- | -------------------------------------------- |
 | options                 | object | yes      |                                              |
 | options.baseUrl         | string | yes      | URL where the trading-post API can be found. |
 | options.credentialsFile | string | yes      | Must point to a JSON file and contain a refresh_token. access_token will automatically be retrieved and cached here. |
@@ -52,13 +52,13 @@ const tradingPost  = new TradingPost({
 ```
 
 ### createBuyOrder
-| Parameter                 | Type     | Required | Description                                      |
-| ------------------------- | -------- | -------- | ------------------------------------------------ |
-| options                   | object   | yes      |                                                  |
-| options.quantity          | string   | yes      | Quantity of stock to purchase                    |
-| options.ticker            | string   | yes      | Stock ticker name to purchase (case insensitive) |
-| callback(error, buyOrder) | function | yes      | Will be called with error or buyOrder when the request is complete |
-----------------------------------------------------------------------------------------------------
+| Parameter        | Type     | Required | Description                                                        |
+| ---------------- | -------- | -------- | ------------------------------------------------------------------ |
+| options          | object   | yes      |                                                                    |
+| options.quantity | string   | yes      | Quantity of stock to purchase                                      |
+| options.ticker   | string   | yes      | Stock ticker name to purchase (case insensitive)                   |
+| callback         | function | yes      | Will be called with error or buyOrder when the request is complete |
+-------------------------------------------------------------------------------------------------------------
 ```javascript
 tradingPost.createBuyOrder({ quantity: 1, ticker: 'goog' }, (error, buyOrder) => {
   if (error) throw error
@@ -75,13 +75,13 @@ tradingPost.createBuyOrder({ quantity: 1, ticker: 'goog' }, (error, buyOrder) =>
 ```
 
 ### createSellOrder
-| Parameter                 | Type     | Required | Description                                      |
-| ------------------------- | -------- | -------- | ------------------------------------------------ |
-| options                   | object   | yes      |                                                  |
-| options.quantity          | string   | yes      | Quantity of stock to sell                    |
-| options.ticker            | string   | yes      | Stock ticker name to sell (case insensitive) |
-| callback(error, sellOrder) | function | yes     | Will be called with error or sellOrder when the request is complete |
-----------------------------------------------------------------------------------------------------
+| Parameter        | Type     | Required | Description                                                         |
+| ---------------- | -------- | -------- | ------------------------------------------------------------------- |
+| options          | object   | yes      |                                                                     |
+| options.quantity | string   | yes      | Quantity of stock to sell                                           |
+| options.ticker   | string   | yes      | Stock ticker name to sell (case insensitive)                        |
+| callback         | function | yes      | Will be called with error or sellOrder when the request is complete |
+--------------------------------------------------------------------------------------------------------------
 ```javascript
 tradingPost.createSellOrder({ quantity: 1, ticker: 'goog' }, (error, sellOrder) => {
   if (error) throw error
@@ -98,10 +98,10 @@ tradingPost.createSellOrder({ quantity: 1, ticker: 'goog' }, (error, sellOrder) 
 ```
 
 ### getUser
-| Parameter             | Type     | Required | Description                                      |
-| --------------------- | -------- | -------- | ------------------------------------------------ |
-| callback(error, user) | function | yes      | Will be called with error or user when the request is complete |
-------------------------------------------------------------------------------------------------
+| Parameter   | Type     | Required | Description                                                    |
+| ----------- | -------- | -------- | -------------------------------------------------------------- |
+| callback    | function | yes      | Will be called with error or user when the request is complete |
+----------------------------------------------------------------------------------------------------
 ```javascript
 tradingPost.getUser((error, user) => {
   if (error) throw error
