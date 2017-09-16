@@ -4,10 +4,27 @@ NPM module for interacting with the trading-post. Can be used as a library and/o
 [![Build Status](https://travis-ci.org/royvandewater/node-trading-post.svg?branch=master)](https://travis-ci.org/royvandewater/node-trading-post)
 [![npm version](https://badge.fury.io/js/trading-post.svg)](http://badge.fury.io/js/trading-post)
 
+
+## CLI
+
 ## Install
 
 ```shell
 yarn global add trading-post
+```
+
+## Example Usage
+
+```shell
+trading-post buy --quantity 100 goog
+```
+
+## Library
+
+## Install
+
+```shell
+yarn add trading-post
 ```
 
 ## Usage
