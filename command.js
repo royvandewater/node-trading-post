@@ -10,10 +10,16 @@ const concat = require('lodash/fp/concat')
 const has = require('lodash/fp/has')
 const isEmpty = require('lodash/fp/isEmpty')
 const mapKeys = require('lodash/fp/mapKeys')
+
+const BuyCommand = require('./lib/commands/BuyCommand')
 const UserCommand = require('./lib/commands/UserCommand')
 const packageJson = require('./package.json')
 
 const COMMANDS = {
+  buy: {
+    run: ({ argv, baseUrl, credentialsFile }) => { new BuyCommand({ argv, baseUrl, credentialsFile }).run() },
+    help: 'Buy a stock',
+  },
   user: {
     run: ({ argv, baseUrl, credentialsFile }) => { new UserCommand({ argv, baseUrl, credentialsFile }).run() },
     help: 'Show user information',
@@ -95,7 +101,7 @@ COMMANDS:
   validateCredentialsFile(credentialsFile) {
     if (isEmpty(credentialsFile)) {
       console.error(this.usage())
-      console.error(chalk.red('Missing required option --credentials-file, -c'))
+      console.error(chalk.red('Missing required global option --credentials-file, -c'))
       process.exit(1)
     }
 
