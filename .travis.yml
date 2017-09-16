@@ -1,0 +1,10 @@
+language: node_js
+node_js: '8'
+deploy:
+  provider: npm
+  email: roy.v.water@gmail.com
+  api_key:
+    secure: yOVJznc19DdzifSXh5ZrgbzTry6YsnTgdipErwS5LtfSMwkspWKAbUzjUDxCTHDwwjPtuIrecnpu80EGqo6eDdkuWAGBFPbdpcdVkBcka7UNWjPejmu9V8l/qmcG/V3gTUILhuCdQ3UQZu7BtOoM7BB92BoX2Dt6fYiaHTsQ4u4ncp4Hw/il3PFc/xfLIVQxn8GVGqNkpOwBvXPy/8XuKna8F4SRXpXFiLEkYU/Zte2szh53eYc2XVQ7Xu9My5u+WOe1OcvM6mI/hUEkYvZ+J1zPaGWh6UEbH4Sfxc82TBqmt1tiGvIduUQr++TJk/CKUNM5wPvEN3e6NnXW7dsoxnSN3O3IfutyQIJ7IaLo1VVxOuPOjsl/bpZNkIxqtlTXqdmyHLY83IE6AgvjOG5p5aznHvRZWgZsSr+1OktM0QDtLAe0l2JQeQ3nzFfqqp7IMSuMN8jYIT7pE0one4EO7pWTekmXjeBStQEPYZavaJKHs/WfEqOavgc3J0PY+bTCftXcPNENeqpxxHpDWPSIwFQCgRe0A19MLVNZliyZCJGxKE8ScsHDw+7yriGpl6yA+NwzJP02n83bg6onN2qjAqFq3XF/INTo4NaphTDGWjvEwHnXwAPvug5hx7WVlKlZtC9QyXy1N1nXZEC0MuiBt0fYtnZ5awWdJU+fFgh0dxI=
+  on:
+    tags: true
+    repo: royvandewater/node-trading-post
