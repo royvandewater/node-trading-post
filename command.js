@@ -12,6 +12,7 @@ const isEmpty = require('lodash/fp/isEmpty')
 const mapKeys = require('lodash/fp/mapKeys')
 
 const BuyCommand = require('./lib/commands/BuyCommand')
+const SellCommand = require('./lib/commands/SellCommand')
 const UserCommand = require('./lib/commands/UserCommand')
 const packageJson = require('./package.json')
 
@@ -19,6 +20,10 @@ const COMMANDS = {
   buy: {
     run: ({ argv, baseUrl, credentialsFile }) => { new BuyCommand({ argv, baseUrl, credentialsFile }).run() },
     help: 'Buy a stock',
+  },
+  sell: {
+    run: ({ argv, baseUrl, credentialsFile }) => { new SellCommand({ argv, baseUrl, credentialsFile }).run() },
+    help: 'Sell a stock',
   },
   user: {
     run: ({ argv, baseUrl, credentialsFile }) => { new UserCommand({ argv, baseUrl, credentialsFile }).run() },
