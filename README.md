@@ -7,13 +7,13 @@ NPM module for interacting with the trading-post. Can be used as a library and/o
 
 ## CLI
 
-## Install
+### Install
 
 ```shell
 yarn global add trading-post
 ```
 
-## Example Usage
+### Example Usage
 
 ```shell
 trading-post buy --quantity 100 goog
@@ -21,13 +21,13 @@ trading-post buy --quantity 100 goog
 
 ## Library
 
-## Install
+### Install
 
 ```shell
 yarn add trading-post
 ```
 
-## Usage
+### Usage
 
 ```javascript
 const TradingPost = require('trading-post')
@@ -52,9 +52,9 @@ tradingPost.getUser((error, user) => {
   // }
 ```
 
-## Functions
+### Functions
 
-### Constructor
+#### Constructor
 | Parameter               | Type   | Required | Description                                  |
 | ------------------------| -------| -------- | -------------------------------------------- |
 | options                 | object | yes      |                                              |
@@ -68,7 +68,7 @@ const tradingPost  = new TradingPost({
 })
 ```
 
-### createBuyOrder
+#### createBuyOrder
 | Parameter        | Type     | Required | Description                                                        |
 | ---------------- | -------- | -------- | ------------------------------------------------------------------ |
 | options          | object   | yes      |                                                                    |
@@ -91,7 +91,7 @@ tradingPost.createBuyOrder({ quantity: 1, ticker: 'goog' }, (error, buyOrder) =>
 })
 ```
 
-### createSellOrder
+#### createSellOrder
 | Parameter        | Type     | Required | Description                                                         |
 | ---------------- | -------- | -------- | ------------------------------------------------------------------- |
 | options          | object   | yes      |                                                                     |
@@ -114,7 +114,7 @@ tradingPost.createSellOrder({ quantity: 1, ticker: 'goog' }, (error, sellOrder) 
 })
 ```
 
-### getUser
+#### getUser
 | Parameter   | Type     | Required | Description                                                    |
 | ----------- | -------- | -------- | -------------------------------------------------------------- |
 | callback    | function | yes      | Will be called with error or user when the request is complete |
