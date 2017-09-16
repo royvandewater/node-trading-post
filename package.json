@@ -8,6 +8,7 @@
   "dependencies": {
     "chalk": "^2.1.0",
     "dashdash": "^1.14.1",
+    "jsonwebtoken": "^8.0.1",
     "lodash": "^4.17.4",
     "request": "^2.81.0"
   },
