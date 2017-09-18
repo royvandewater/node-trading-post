@@ -1,6 +1,6 @@
 {
   "name": "trading-post",
-  "version": "1.3.6",
+  "version": "1.3.7",
   "main": "index.js",
   "bin": "command.js",
   "repository": "git@github.com:royvandewater/node-trading-post.git",
@@ -17,8 +17,8 @@
     "request": "^2.81.0"
   },
   "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-airbnb-base": "^11.3.2",
+    "eslint": "^4.7.0",
+    "eslint-config-airbnb-base": "^12.0.0",
     "eslint-plugin-import": "^2.7.0"
   }
 }
