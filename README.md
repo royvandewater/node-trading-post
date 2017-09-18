@@ -4,6 +4,17 @@ NPM module for interacting with the trading-post. Can be used as a library and/o
 [![Build Status](https://travis-ci.org/royvandewater/node-trading-post.svg?branch=master)](https://travis-ci.org/royvandewater/node-trading-post)
 [![npm version](https://badge.fury.io/js/trading-post.svg)](http://badge.fury.io/js/trading-post)
 
+## Credentials
+
+To obtain the information you'll need to build a `credentials.json`, 
+you'll want to visit https://trading-post.club. After login, copy paste
+just the `refresh_token` into a credentials.json like so: 
+
+```json
+{
+  "refresh_token": "i-made-this-up"
+}
+```
 
 ## CLI
 
