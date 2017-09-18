@@ -16,6 +16,9 @@ just the `refresh_token` into a credentials.json like so:
 }
 ```
 
+Both the library & CLI tool will automatically exchange the `refresh_token` for
+an `access_token` when necessary and cache it back in the credentials.json file. 
+
 ## CLI
 
 ### Install
