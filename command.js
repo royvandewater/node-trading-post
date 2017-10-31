@@ -99,6 +99,8 @@ USAGE:
 GLOBALOPTS:
 ${parser.help({ includeEnv: true, indent: 4 })}
 COMMANDS:
+    buy     Buy stock(s)
+    sell    Sell stock(s)
     user    Show user information
     `.trim()
   }
